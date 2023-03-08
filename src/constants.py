@@ -13,6 +13,7 @@ eqp = ['crane','cranes','crains','jcb',"jcb's",'jcbs','roller','rollers','bulldo
 # locations
 loc = ['pune','mumbai','nashik']
 
+
 # quantity
 Qty = [1,2,3,4,5,6,7,8,9,10]
 

@@ -1,11 +1,9 @@
-import os
+my_list = ['pune','jcb','one']
 
-folder_path = "pred"
+# Create a dictionary to map string elements to integers
+mapping = {'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'eleven': 11, 'twelve': 12, 'thirteen': 13, 'fourteen': 14, 'fifteen': 15, 'sixteen': 16, 'seventeen': 17, 'eighteen': 18, 'nineteen': 19, 'twenty': 20}
 
-# Get list of all files in the folder
-files = os.listdir(folder_path)
+# Use a list comprehension to replace string elements with integers
+my_list = [mapping[x] for x in my_list]
 
-# Iterate over each file and delete it
-for file in files:
-    file_path = os.path.join(folder_path, file)
-    os.remove(file_path)
+print(my_list)
