@@ -16,8 +16,8 @@ class SpeechRecognition:
             engine = pyttsx3.init()
 
             # Convert text to speech
-            text = "Welcome to Equip 9, please tell us your requirement"
-            engine.say(text)
+            welcome_text = "Welcome to Equip 9, please tell us your requirement"
+            engine.say(welcome_text)
 
             # Speak the text
             engine.runAndWait()
