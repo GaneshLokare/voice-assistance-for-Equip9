@@ -7,7 +7,7 @@ import os
 # call the recognize_speech method on the instance
 text = SpeechRecognition().recognize_speech()
 
-query_gen = QueryGenerator(text, not_req, req, eqp, loc)
+query_gen = QueryGenerator(text, not_req, req, eqp, loc, Qty)
 result = query_gen.generate_query()
 
 

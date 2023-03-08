@@ -8,15 +8,15 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 
 
-LABELS = {'jcb' : 0 , 'bulldozer' : 1, 'crane': 2}
-INV_LABELS = {0 : 'jcb', 1 : 'bulldozer', 2 : 'crane'}
+LABELS = {'jcb' : 0 , 'bulldozer' : 1, 'crane': 2, 'excavator' : 3, 'roller' : 4}
+INV_LABELS = {0 : 'jcb', 1 : 'bulldozer', 2 : 'crane', 3 : 'excavator', 4 : 'roller'}
 
 
     
 langs=['en']
-loaded_model = load_model('aug_model.h5')
+loaded_model = load_model('model.h5')
 sample_rate = 22050
-max_length = 50000
+max_length = 45000
 
 
 def predict(final_words,not_spoken_well):
@@ -45,7 +45,7 @@ def predict(final_words,not_spoken_well):
             else:
                 return samples
 
-    samples_train, samples_test, durations_train, durations_test = [],[],[],[]
+    samples_train, durations_train, = [],[]
 
 
     for ele in all_files:
@@ -81,13 +81,10 @@ def predict(final_words,not_spoken_well):
         X_train_spectrogram.append(logmel)
     X_train_spectrogram = np.array(X_train_spectrogram)
 
-
-    y_pred = loaded_model.predict(X_train_spectrogram[0].reshape((1, 64, 98)))
-
-    if np.max(y_pred) < 0.8:
-        print('other')
-    else:
-        final_words.append(INV_LABELS[np.argmax(y_pred)])
+    for i in range(len(X_train_spectrogram)):
+        y_pred = loaded_model.predict(X_train_spectrogram[i].reshape((1, 64, 88)))
+        word = INV_LABELS[np.argmax(y_pred)]
+        final_words.append(word)
 
     return final_words
         

@@ -14,8 +14,7 @@ eqp = ['crane','cranes','crains','jcb',"jcb's",'jcbs','roller','rollers','bulldo
 loc = ['pune','mumbai','nashik']
 
 # quantity
-Qty = ['one','two','three','four','five','six','seven','eight','nine','ten','1',
-      '2','3','4','5','6','7','8','9','10']
+Qty = [1,2,3,4,5,6,7,8,9,10]
 
 
 
