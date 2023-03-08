@@ -26,6 +26,7 @@ class SpeechRecognition:
 
                 audio = self.recognizer.listen(source)
 
+                # convert spoken sentence into text
                 text = self.recognizer.recognize_google(audio)
                 text = text.lower()
 

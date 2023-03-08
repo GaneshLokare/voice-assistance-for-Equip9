@@ -10,7 +10,7 @@ text = SpeechRecognition().recognize_speech()
 query_gen = QueryGenerator(text, not_req, req, eqp, loc, Qty)
 result = query_gen.generate_query()
 
-
+# folder path 
 folder_path = "pred"
 
 # Get list of all files in the folder

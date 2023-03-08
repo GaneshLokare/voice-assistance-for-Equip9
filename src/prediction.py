@@ -9,14 +9,17 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from src.exception import equip9_Exception
 
 
-
+# create labels and invers labels for the prdiction
 LABELS = {'jcb' : 0 , 'bulldozer' : 1, 'crane': 2, 'excavator' : 3, 'roller' : 4}
 INV_LABELS = {0 : 'jcb', 1 : 'bulldozer', 2 : 'crane', 3 : 'excavator', 4 : 'roller'}
 
 
-    
+# language to speak for converting text to speech for prediction    
 langs=['en']
+
+# load the trained model for prediction
 loaded_model = load_model('model.h5')
+
 sample_rate = 22050
 max_length = 45000
 
@@ -34,7 +37,7 @@ def predict(final_words,not_spoken_well):
                         
                 except:
                     pass
-            
+            # list all the files which are present in pred folder
             all_files = os.listdir('pred')
             all_files = ['pred\\' + ele for ele in all_files]
 
@@ -50,7 +53,7 @@ def predict(final_words,not_spoken_well):
 
         samples_train, durations_train, = [],[]
 
-
+        # use above function for all the files
         for ele in all_files:
             try:
                 samples, duration = load_wav(ele)
@@ -59,9 +62,10 @@ def predict(final_words,not_spoken_well):
             except:
                 print(ele)
 
+        # save it into dataframe
         X_train_processed = pd.DataFrame({'raw_data' : samples_train, 'duration' : durations_train})
             
-        
+        #padding the sequences
         X_train_pad_seq = pad_sequences(X_train_processed.raw_data, 
                                             maxlen = max_length, 
                                             padding = 'post',
@@ -87,6 +91,7 @@ def predict(final_words,not_spoken_well):
         max_value = -1
         max_array = None
 
+        # take each file from pred folder and predict and select the class for which model gives maximum value
         for i in range(len(X_train_spectrogram)):
             y_pred = loaded_model.predict(X_train_spectrogram[i].reshape((1, 64, 88)))
             if np.max(y_pred) > max_value:
